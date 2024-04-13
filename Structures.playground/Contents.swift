@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - Pet
+
 // constructors are implicitly created by the compiler
 // but only in structures, and not in classes
 
@@ -20,20 +22,28 @@ let pet1 = Pet(name: "Terror", age: 13)
 pet1.name
 pet1.age
 
+// MARK: - CommodoreComputer
+
 // sometimes constructors/initializers are necessary
 
 struct CommodoreComputer {
-    let name: String
-    let manufacturer: String
+    // MARK: Lifecycle
 
     init(name: String) {
         self.name = name
-        self.manufacturer = "Commodore"
+        manufacturer = "Commodore"
     }
+
+    // MARK: Internal
+
+    let name: String
+    let manufacturer: String
 }
 
 let c64 = CommodoreComputer(name: "My Sunshine")
 let c128 = CommodoreComputer(name: "My Only Sunshine")
+
+// MARK: - AppleComputer
 
 // alternative way to initialize properties
 
@@ -44,38 +54,53 @@ struct AppleComputer {
 
 let m1 = AppleComputer(name: "Macbook Air")
 
+// MARK: - AcerComputer
+
 // OR
 
 struct AcerComputer {
-    let name: String
-    let manufacturer = "Acer Corp"
+    // MARK: Lifecycle
 
     init(name: String) {
         self.name = name
     }
+
+    // MARK: Internal
+
+    let name: String
+    let manufacturer = "Acer Corp"
 }
 
 let aspire = AcerComputer(name: "Aspire Series 1E")
 
+// MARK: - Person
+
 // Computed Properties
 
 struct Person {
-    let firstName: String
-    let lastName: String
-    let fullName: String
+    // MARK: Lifecycle
 
     init(firstName: String, lastName: String) {
         self.firstName = firstName
         self.lastName = lastName
-        self.fullName = "\(firstName) \(lastName)"
+        fullName = "\(firstName) \(lastName)"
     }
+
+    // MARK: Internal
+
+    let firstName: String
+    let lastName: String
+    let fullName: String
 }
 
 let person1 = Person(firstName: "Jasper", lastName: "Jinga")
 
+// MARK: - BetterPerson
+
 struct BetterPerson {
     let firstName: String
     let lastName: String
+
     var fullName: String {
         "\(firstName) \(lastName)"
     }
@@ -86,10 +111,13 @@ person2.fullName
 // fullName computer property doesn't show up
 person2.self
 
+// MARK: - Car
+
 // mutating Structures
 
 struct Car {
     var currentSpped: Int
+
     mutating func drive(speed: Int) {
         currentSpped = speed
     }
@@ -103,6 +131,8 @@ mutableCar.drive(speed: 17)
 
 let copiedMutableCar = mutableCar
 // copiedMutableCar.drive(speed: 12)
+
+// MARK: - Bike
 
 // Recipe: Changing values while copying
 

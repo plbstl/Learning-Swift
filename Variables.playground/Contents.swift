@@ -8,7 +8,7 @@ let greeting = "Hello, playground"
 
 var list = [
     greeting,
-    "Cool ins"
+    "Cool ins",
 ]
 
 list = ["New"]

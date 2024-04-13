@@ -13,43 +13,58 @@ extension Int {
 let num = 8
 num.plusTwo()
 
+// MARK: - Person
+
 // lets say we want this, but we have no access to Person struct and the fullName property is missing, and no initializer with fullName only
 // we can use Extensions for that
 
 struct Person {
-    let firstName: String
-    let lastName: String
-    private let fullName: String
+    // MARK: Lifecycle
 
     init(firstName: String, lastName: String) {
         self.firstName = firstName
         self.lastName = lastName
-        self.fullName = "\(firstName) \(lastName)"
+        fullName = "\(firstName) \(lastName)"
     }
 
     init(fullName: String) {
         let components = fullName.components(separatedBy: " ")
 
-        self.firstName = components.first ?? fullName
-        self.lastName = components.last ?? fullName
+        firstName = components.first ?? fullName
+        lastName = components.last ?? fullName
         self.fullName = fullName
     }
+
+    // MARK: Internal
+
+    let firstName: String
+    let lastName: String
+
+    // MARK: Private
+
+    private let fullName: String
 }
 
 let p1 = Person(fullName: "Harley Davison")
 p1.firstName
 p1.lastName
 
+// MARK: - Persona
+
 // This is what we're working with
 
 struct Persona {
-    let firstName: String
-    let lastName: String
+    // MARK: Lifecycle
 
     init(firstName: String, lastName: String) {
         self.firstName = firstName
         self.lastName = lastName
     }
+
+    // MARK: Internal
+
+    let firstName: String
+    let lastName: String
 }
 
 // using extensions...
@@ -69,6 +84,8 @@ let p2 = Persona(fullName: "Helwett Packett")
 p2.firstName
 p2.lastName
 
+// MARK: - GoesVrooom
+
 // Extensions also lets you add initializers, properties and functions to existing objects and types
 
 // lets say we have no access to this code
@@ -77,6 +94,8 @@ protocol GoesVrooom {
     var vroomValue: String { get }
     func goVroom() -> String
 }
+
+// MARK: - Car
 
 struct Car {
     var manufacturer: String
@@ -90,13 +109,15 @@ car1.self
 
 extension GoesVrooom {
     func goVroom() -> String {
-        "\(self.vroomValue) goes vrooom"
+        "\(vroomValue) goes vrooom"
     }
 }
 
+// MARK: - Car + GoesVrooom
+
 extension Car: GoesVrooom {
     var vroomValue: String {
-        "\(self.manufacturer) model \(self.model)"
+        "\(manufacturer) model \(model)"
     }
 }
 
@@ -106,19 +127,26 @@ car1.goVroom()
 
 extension GoesVrooom {
     func goesVroomTimesTwo() -> String {
-        "\(self.vroomValue) goes vroOom vRoOOMm"
+        "\(vroomValue) goes vroOom vRoOOMm"
     }
 }
 
 car1.goesVroomTimesTwo()
 
+// MARK: - MyDouble
+
 // adding a convenience init with extensions
 
 class MyDouble {
-    let value: Double
+    // MARK: Lifecycle
+
     init(value: Double) {
         self.value = value
     }
+
+    // MARK: Internal
+
+    let value: Double
 }
 
 extension MyDouble {

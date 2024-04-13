@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - Person
+
 // Classes are reference types. they can mutate values internally without needing the mutating keyword
 // constructors are required for classes
 
@@ -9,17 +11,21 @@ import Foundation
 // classes can have multiple Convenience initializers and multiple Designated initializers
 
 class Person {
-    let name: String
-    var age: Int
+    // MARK: Lifecycle
 
-    init(name: String, age: Int, notClassProperty: Int? = 0) {
+    init(name: String, age: Int, notClassProperty _: Int? = 0) {
         self.name = name
         self.age = age
         // notClassProperty can be used here to for other calculations or something
     }
 
+    // MARK: Internal
+
+    let name: String
+    var age: Int
+
     func birthday() {
-        self.age += 1
+        age += 1
     }
 }
 
@@ -44,19 +50,25 @@ let person2 = Person(name: "Shank", age: 72)
 
 person2 === person1Clone
 
+// MARK: - Animal
+
 // equality (==) checks if the operands (classes) are equal based on some logic
 // you have to manually create it (==) to use it
 
 class Animal: Equatable {
-    var name: String
-    var age: Int
-    var specie: String
+    // MARK: Lifecycle
 
     init(name: String, age: Int, specie: String) {
         self.name = name
         self.age = age
         self.specie = specie
     }
+
+    // MARK: Internal
+
+    var name: String
+    var age: Int
+    var specie: String
 
     static func == (lhs: Animal, rhs: Animal) -> Bool {
         lhs.specie == rhs.specie
@@ -69,6 +81,8 @@ let animal2 = Animal(name: "Loswad", age: 17, specie: "Homo Erectus")
 animal1 == animal2
 animal1 === animal2
 
+// MARK: - Vehicle
+
 // Subclassing
 
 class Vehicle {
@@ -77,25 +91,33 @@ class Vehicle {
     }
 }
 
+// MARK: - Car
+
 class Car: Vehicle {}
 
 let newCar = Car()
 newCar.goBrrrr()
 
+// MARK: - AnotherPerson
+
 // by default, class properties can be both internally & externally changed
 // lets make it changeable only internally
 
 class AnotherPerson {
-    var name: String
-    private(set) var age: Int
+    // MARK: Lifecycle
 
     init(name: String, age: Int) {
         self.name = name
         self.age = age
     }
 
+    // MARK: Internal
+
+    var name: String
+    private(set) var age: Int
+
     func birthday() {
-        self.age += 1
+        age += 1
     }
 }
 
@@ -104,6 +126,8 @@ let anotherPerson = AnotherPerson(name: "Hans", age: 56)
 anotherPerson.birthday()
 anotherPerson.age
 
+// MARK: - Pet
+
 // there are Convenience and Designated initializers
 // convenience initializers can call designated initializers in thier class and superclasses
 // convenience initializers can call convenience initializers in thier class and superclasses
@@ -111,8 +135,7 @@ anotherPerson.age
 // designated initializers can only call designated initializers in thier superclasses
 
 class Pet {
-    var name: String
-    var age: Int
+    // MARK: Lifecycle
 
     init(name: String, age: Int) {
         self.name = name
@@ -122,7 +145,14 @@ class Pet {
     convenience init(name: String) {
         self.init(name: name, age: 0)
     }
+
+    // MARK: Internal
+
+    var name: String
+    var age: Int
 }
+
+// MARK: - FurryPet
 
 class FurryPet: Pet {
     convenience init() {
@@ -142,19 +172,25 @@ let fpet2 = FurryPet(name: "Jagu")
 fpet2.name
 fpet2.age
 
+// MARK: - Random
+
 // de-initializers are run by Swift when removing classes from memory
 
 class Random {
+    // MARK: Lifecycle
+
     init() {
         "Initialized"
     }
 
-    func doSomething() {
-        "Did something"
-    }
-
     deinit {
         "Deinitialized"
+    }
+
+    // MARK: Internal
+
+    func doSomething() {
+        "Did something"
     }
 }
 

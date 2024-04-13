@@ -25,7 +25,9 @@ add(91, 21)
 func customAdd(
     lhs: Int,
     rhs: Int,
-    fn: (Int, Int) -> Int) -> Int
+    fn: (Int, Int) -> Int
+)
+    -> Int
 {
     fn(lhs, rhs)
 }
@@ -34,8 +36,7 @@ customAdd(lhs: 8, rhs: 8, fn: add)
 
 // using a Trailing Closure Syntax.
 // requirement is last argument is a closure
-customAdd(lhs: 9, rhs: 9)
-{ lhs, rhs in
+customAdd(lhs: 9, rhs: 9) { lhs, rhs in
     lhs + rhs
 }
 
@@ -45,7 +46,9 @@ customAdd(lhs: 9, rhs: 9, fn: +)
 func customPlus(
     _ lhs: Int,
     _ rhs: Int,
-    using function: (Int, Int) -> Int) -> Int
+    using function: (Int, Int) -> Int
+)
+    -> Int
 {
     function(lhs, rhs)
 }
@@ -59,8 +62,7 @@ ages.sorted(by: { (lhs: Int, rhs: Int) -> Bool in
     lhs < rhs
 })
 
-ages.sorted
-{ lhs, rhs in
+ages.sorted { lhs, rhs in
     lhs < rhs
 }
 

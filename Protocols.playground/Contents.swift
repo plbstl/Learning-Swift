@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - CanBreathe
+
 // maybe think of protocols as interfaces in typescript? but that they can also have implementations (like in Dart)
 
 // protocols cannot be instantiated
@@ -8,11 +10,15 @@ protocol CanBreathe {
     func breathe()
 }
 
+// MARK: - Animal
+
 struct Animal: CanBreathe {
     func breathe() {
         "Animal breathing..."
     }
 }
+
+// MARK: - Person
 
 struct Person: CanBreathe {
     func breathe() {
@@ -24,6 +30,8 @@ let cat = Animal()
 cat.breathe()
 let dude = Person()
 dude.breathe()
+
+// MARK: - CanJump
 
 // protocol with (default) implementation
 // maybe think of extensions as prototypes in javascript? [Object.proto.newMethod = () => {}]
@@ -38,6 +46,8 @@ extension CanJump {
     }
 }
 
+// MARK: - Cat
+
 struct Cat: CanJump {
     func jump() {
         "Can override default jump implementation"
@@ -46,6 +56,8 @@ struct Cat: CanJump {
 
 let whiskers = Cat()
 whiskers.jump()
+
+// MARK: - HasNameAndAge
 
 // protocols can also define variables, they have to have explicit read/write properties
 // the thing is, these read/write properties ({get set}) are only enforced in Extensions
@@ -61,12 +73,12 @@ protocol HasNameAndAge {
 
 extension HasNameAndAge {
     func describe() -> String {
-        "Your name is \(self.name), and you are \(self.age) years old"
+        "Your name is \(name), and you are \(age) years old"
     }
 
     /// understandable, because age is readable & writable
     mutating func birthday() {
-        self.age += 1
+        age += 1
     }
 
     // Cannot assign to property: 'name' is a get-only property. but can do that in the struct
@@ -75,6 +87,8 @@ extension HasNameAndAge {
     //    }
 }
 
+// MARK: - Lady
+
 struct Lady: HasNameAndAge {
     /// var means name can be mutated
     var name: String
@@ -82,7 +96,7 @@ struct Lady: HasNameAndAge {
 
     /// should not be possible, even when using var?
     mutating func changeName() {
-        self.name = "Shanta"
+        name = "Shanta"
     }
 }
 
@@ -99,6 +113,8 @@ lady1.describe()
 lady1.changeName()
 lady1.describe()
 
+// MARK: - Vehicle
+
 // is keyword checks if a struct conforms to a specific protocol
 // as keyword checks if a struct conforms to a specific protocol, and promotes the struct
 
@@ -109,12 +125,14 @@ protocol Vehicle {
 
 extension Vehicle {
     mutating func accelerate(by value: Int) {
-        self.speed += value
+        speed += value
     }
 }
 
+// MARK: - Bike
+
 struct Bike: Vehicle {
-    var speed: Int = 0
+    var speed = 0
 }
 
 var bike = Bike()
@@ -132,6 +150,8 @@ func describeRelationship(obj: Any) {
 }
 
 describeRelationship(obj: bike)
+
+// MARK: - Randy
 
 struct Randy {}
 let rando = Randy()
