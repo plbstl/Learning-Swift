@@ -3,6 +3,7 @@ import Foundation
 // in Swift, any function that doesn't have the func keyword is pretty much a closure
 
 // maybe think of them as function expressions in javascript?
+// maybe think of closures as anonymous functions in javascript?
 
 // func add(_ lhs: Int, _ rhs: Int) -> Int {
 //    lhs + rhs
