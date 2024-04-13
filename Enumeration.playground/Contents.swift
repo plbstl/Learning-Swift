@@ -78,13 +78,10 @@ switch appleCom {
 
 // actually, this is much cleaner
 switch ringtone {
-    // case let .file(dirPath, fileName):
     case let .file(dirPath, fileName):
         break
-    // case let .wwwUrl(path):
     case let .wwwURL(path):
         break
-    // case let .song(owner, name):
     case let .song(owner, name):
         // you can also change the arg names but not suggested, as it will mosdef hinder later on
         break
@@ -97,7 +94,6 @@ if case let .file(dirPath, fileName) = configFile {
 
 // OR
 
-// if case let .file(dirPath, fileName) = appleCom {
 if case let .wwwURL(path) = appleCom {
     path
 }
@@ -107,7 +103,6 @@ if case let .song(_, songName) = ringtone {
 }
 
 // ignore args
-// if case let .song(_, songName) = ringtone {
 if case let .song(_, songName) = ringtone {
     songName
 }
