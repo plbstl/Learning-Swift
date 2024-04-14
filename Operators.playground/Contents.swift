@@ -17,7 +17,7 @@ let doubleYourAge = yourAge * 2
 /// unary prefix !
 let done = !true
 
-/// unary suffix !
+/// unary postfix !
 let name = Optional("Hugo")
 type(of: name)
 let unaryPostfix = name!

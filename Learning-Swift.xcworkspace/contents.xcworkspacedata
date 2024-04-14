@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Custom-Operators.playground">
+   </FileRef>
+   <FileRef
       location = "group:Equality-and-Hashing.playground">
    </FileRef>
    <FileRef
