@@ -11,11 +11,11 @@ import Foundation
 
 /// function closures
 let add: (Int, Int) -> Int = { (lhs: Int, rhs: Int) -> Int in
-    lhs + rhs
+  lhs + rhs
 }
 
 let addStyle2: (Int, Int) -> Int = { lhs, rhs in
-    lhs + rhs
+  lhs + rhs
 }
 
 let addStyle3: (Int, Int) -> Int = { $0 + $1 }
@@ -24,13 +24,13 @@ add(91, 21)
 
 /// pass function as argument
 func customAdd(
-    lhs: Int,
-    rhs: Int,
-    fn: (Int, Int) -> Int
+  lhs: Int,
+  rhs: Int,
+  fn: (Int, Int) -> Int
 )
-    -> Int
+  -> Int
 {
-    fn(lhs, rhs)
+  fn(lhs, rhs)
 }
 
 customAdd(lhs: 8, rhs: 8, fn: add)
@@ -38,20 +38,20 @@ customAdd(lhs: 8, rhs: 8, fn: add)
 // using a Trailing Closure Syntax.
 // requirement is last argument is a closure
 customAdd(lhs: 9, rhs: 9) { lhs, rhs in
-    lhs + rhs
+  lhs + rhs
 }
 
 customAdd(lhs: 9, rhs: 9, fn: +)
 
 /// using a Trailing Closure Syntax. example 2
 func customPlus(
-    _ lhs: Int,
-    _ rhs: Int,
-    using function: (Int, Int) -> Int
+  _ lhs: Int,
+  _ rhs: Int,
+  using function: (Int, Int) -> Int
 )
-    -> Int
+  -> Int
 {
-    function(lhs, rhs)
+  function(lhs, rhs)
 }
 
 customPlus(21, 4) { $0 + $1 }
@@ -60,11 +60,11 @@ customPlus(21, 4) { $0 + $1 }
 let ages = [91, 70, 42, 38, 21, 109]
 
 ages.sorted(by: { (lhs: Int, rhs: Int) -> Bool in
-    lhs < rhs
+  lhs < rhs
 })
 
 ages.sorted { lhs, rhs in
-    lhs < rhs
+  lhs < rhs
 }
 
 ages.sorted(by: <)

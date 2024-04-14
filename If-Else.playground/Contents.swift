@@ -7,24 +7,24 @@ let age = 39
 // they are helpful when using many logical ANDs and ORs
 
 if name == "ragna" {
-    "You really are \(name)"
+  "You really are \(name)"
 } else {
-    "You are NOT The Chosen One"
+  "You are NOT The Chosen One"
 }
 
 // another way: if name == "Ragna" && age == 39
 if name == "Ragna", age == 39 {
-    "I see all things"
+  "I see all things"
 } else if name == "Ragnar" {
-    "Imposter"
+  "Imposter"
 } else if age > 112 {
-    "Where have you been?!"
+  "Where have you been?!"
 } else {
-    "No hope"
+  "No hope"
 }
 
 if name == "Ragnar" || age < 40 {
-    "There really is hope"
+  "There really is hope"
 } else {
-    "Time to give in"
+  "Time to give in"
 }

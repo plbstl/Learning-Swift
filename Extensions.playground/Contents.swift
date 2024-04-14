@@ -5,9 +5,9 @@ import Foundation
 // Extensions also lets you add initializers, properties and functions to existing objects and types
 
 extension Int {
-    func plusTwo() -> Int {
-        self + 2
-    }
+  func plusTwo() -> Int {
+    self + 2
+  }
 }
 
 let num = 8
@@ -19,30 +19,30 @@ num.plusTwo()
 // we can use Extensions for that
 
 struct Person {
-    // MARK: Lifecycle
+  // MARK: Lifecycle
 
-    init(firstName: String, lastName: String) {
-        self.firstName = firstName
-        self.lastName = lastName
-        fullName = "\(firstName) \(lastName)"
-    }
+  init(firstName: String, lastName: String) {
+    self.firstName = firstName
+    self.lastName = lastName
+    fullName = "\(firstName) \(lastName)"
+  }
 
-    init(fullName: String) {
-        let components = fullName.components(separatedBy: " ")
+  init(fullName: String) {
+    let components = fullName.components(separatedBy: " ")
 
-        firstName = components.first ?? fullName
-        lastName = components.last ?? fullName
-        self.fullName = fullName
-    }
+    firstName = components.first ?? fullName
+    lastName = components.last ?? fullName
+    self.fullName = fullName
+  }
 
-    // MARK: Internal
+  // MARK: Internal
 
-    let firstName: String
-    let lastName: String
+  let firstName: String
+  let lastName: String
 
-    // MARK: Private
+  // MARK: Private
 
-    private let fullName: String
+  private let fullName: String
 }
 
 let p1 = Person(fullName: "Harley Davison")
@@ -54,30 +54,30 @@ p1.lastName
 // This is what we're working with
 
 struct Persona {
-    // MARK: Lifecycle
+  // MARK: Lifecycle
 
-    init(firstName: String, lastName: String) {
-        self.firstName = firstName
-        self.lastName = lastName
-    }
+  init(firstName: String, lastName: String) {
+    self.firstName = firstName
+    self.lastName = lastName
+  }
 
-    // MARK: Internal
+  // MARK: Internal
 
-    let firstName: String
-    let lastName: String
+  let firstName: String
+  let lastName: String
 }
 
 // using extensions...
 
 extension Persona {
-    init(fullName: String) {
-        let components = fullName.components(separatedBy: " ")
+  init(fullName: String) {
+    let components = fullName.components(separatedBy: " ")
 
-        self.init(
-            firstName: components.first ?? fullName,
-            lastName: components.last ?? fullName
-        )
-    }
+    self.init(
+      firstName: components.first ?? fullName,
+      lastName: components.last ?? fullName
+    )
+  }
 }
 
 let p2 = Persona(fullName: "Helwett Packett")
@@ -91,15 +91,15 @@ p2.lastName
 // lets say we have no access to this code
 
 protocol GoesVrooom {
-    var vroomValue: String { get }
-    func goVroom() -> String
+  var vroomValue: String { get }
+  func goVroom() -> String
 }
 
 // MARK: - Car
 
 struct Car {
-    var manufacturer: String
-    var model: String
+  var manufacturer: String
+  var model: String
 }
 
 let car1 = Car(manufacturer: "Tesla", model: "Y")
@@ -108,17 +108,17 @@ car1.self
 // lets extend the car struct to conform to a specific protocol
 
 extension GoesVrooom {
-    func goVroom() -> String {
-        "\(vroomValue) goes vrooom"
-    }
+  func goVroom() -> String {
+    "\(vroomValue) goes vrooom"
+  }
 }
 
 // MARK: - Car + GoesVrooom
 
 extension Car: GoesVrooom {
-    var vroomValue: String {
-        "\(manufacturer) model \(model)"
-    }
+  var vroomValue: String {
+    "\(manufacturer) model \(model)"
+  }
 }
 
 car1.goVroom()
@@ -126,9 +126,9 @@ car1.goVroom()
 // you can add new functionality to all objects that conform to a certain protocol
 
 extension GoesVrooom {
-    func goesVroomTimesTwo() -> String {
-        "\(vroomValue) goes vroOom vRoOOMm"
-    }
+  func goesVroomTimesTwo() -> String {
+    "\(vroomValue) goes vroOom vRoOOMm"
+  }
 }
 
 car1.goesVroomTimesTwo()
@@ -138,21 +138,21 @@ car1.goesVroomTimesTwo()
 // adding a convenience init with extensions
 
 class MyDouble {
-    // MARK: Lifecycle
+  // MARK: Lifecycle
 
-    init(value: Double) {
-        self.value = value
-    }
+  init(value: Double) {
+    self.value = value
+  }
 
-    // MARK: Internal
+  // MARK: Internal
 
-    let value: Double
+  let value: Double
 }
 
 extension MyDouble {
-    convenience init() {
-        self.init(value: 0)
-    }
+  convenience init() {
+    self.init(value: 0)
+  }
 }
 
 let md1 = MyDouble()

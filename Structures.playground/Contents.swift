@@ -14,8 +14,8 @@ import Foundation
 // Structs do not have convenience initializers
 
 struct Pet {
-    var name: String
-    var age: Int
+  var name: String
+  var age: Int
 }
 
 let pet1 = Pet(name: "Terror", age: 13)
@@ -27,17 +27,17 @@ pet1.age
 // sometimes constructors/initializers are necessary
 
 struct CommodoreComputer {
-    // MARK: Lifecycle
+  // MARK: Lifecycle
 
-    init(name: String) {
-        self.name = name
-        manufacturer = "Commodore"
-    }
+  init(name: String) {
+    self.name = name
+    manufacturer = "Commodore"
+  }
 
-    // MARK: Internal
+  // MARK: Internal
 
-    let name: String
-    let manufacturer: String
+  let name: String
+  let manufacturer: String
 }
 
 let c64 = CommodoreComputer(name: "My Sunshine")
@@ -48,8 +48,8 @@ let c128 = CommodoreComputer(name: "My Only Sunshine")
 // alternative way to initialize properties
 
 struct AppleComputer {
-    let name: String
-    let manufacturer = "Apple Inc"
+  let name: String
+  let manufacturer = "Apple Inc"
 }
 
 let m1 = AppleComputer(name: "Macbook Air")
@@ -59,16 +59,16 @@ let m1 = AppleComputer(name: "Macbook Air")
 // OR
 
 struct AcerComputer {
-    // MARK: Lifecycle
+  // MARK: Lifecycle
 
-    init(name: String) {
-        self.name = name
-    }
+  init(name: String) {
+    self.name = name
+  }
 
-    // MARK: Internal
+  // MARK: Internal
 
-    let name: String
-    let manufacturer = "Acer Corp"
+  let name: String
+  let manufacturer = "Acer Corp"
 }
 
 let aspire = AcerComputer(name: "Aspire Series 1E")
@@ -78,19 +78,19 @@ let aspire = AcerComputer(name: "Aspire Series 1E")
 // Computed Properties
 
 struct Person {
-    // MARK: Lifecycle
+  // MARK: Lifecycle
 
-    init(firstName: String, lastName: String) {
-        self.firstName = firstName
-        self.lastName = lastName
-        fullName = "\(firstName) \(lastName)"
-    }
+  init(firstName: String, lastName: String) {
+    self.firstName = firstName
+    self.lastName = lastName
+    fullName = "\(firstName) \(lastName)"
+  }
 
-    // MARK: Internal
+  // MARK: Internal
 
-    let firstName: String
-    let lastName: String
-    let fullName: String
+  let firstName: String
+  let lastName: String
+  let fullName: String
 }
 
 let person1 = Person(firstName: "Jasper", lastName: "Jinga")
@@ -98,12 +98,12 @@ let person1 = Person(firstName: "Jasper", lastName: "Jinga")
 // MARK: - BetterPerson
 
 struct BetterPerson {
-    let firstName: String
-    let lastName: String
+  let firstName: String
+  let lastName: String
 
-    var fullName: String {
-        "\(firstName) \(lastName)"
-    }
+  var fullName: String {
+    "\(firstName) \(lastName)"
+  }
 }
 
 let person2 = BetterPerson(firstName: "Jacinta", lastName: "Joseph")
@@ -116,11 +116,11 @@ person2.self
 // mutating Structures
 
 struct Car {
-    var currentSpped: Int
+  var currentSpped: Int
 
-    mutating func drive(speed: Int) {
-        currentSpped = speed
-    }
+  mutating func drive(speed: Int) {
+    currentSpped = speed
+  }
 }
 
 let immutableCar = Car(currentSpped: 3)
@@ -130,19 +130,20 @@ var mutableCar = Car(currentSpped: 2)
 mutableCar.drive(speed: 17)
 
 let copiedMutableCar = mutableCar
-// copiedMutableCar.drive(speed: 12)
 
 // MARK: - Bike
+
+// copiedMutableCar.drive(speed: 12)
 
 // Recipe: Changing values while copying
 
 struct Bike {
-    let manufacturer: String
-    let currentSpeed: Int
+  let manufacturer: String
+  let currentSpeed: Int
 
-    func copy(currentSpeed: Int) -> Bike {
-        Bike(manufacturer: manufacturer, currentSpeed: currentSpeed)
-    }
+  func copy(currentSpeed: Int) -> Bike {
+    Bike(manufacturer: manufacturer, currentSpeed: currentSpeed)
+  }
 }
 
 let bike1 = Bike(manufacturer: "Harley Davison", currentSpeed: 45)

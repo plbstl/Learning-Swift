@@ -7,8 +7,8 @@ import Foundation
 let greeting = "Hello, playground"
 
 var list = [
-    greeting,
-    "Cool ins",
+  greeting,
+  "Cool ins",
 ]
 
 list = ["New"]

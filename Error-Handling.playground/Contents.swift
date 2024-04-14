@@ -8,58 +8,58 @@ import Foundation
 // Errors can be thrown anywhere; classes, constructors, functions, structures
 
 struct Person {
-    enum Errors: Error {
-        case firstNameIsNil
-        case lastNameIsNil
-        case bothNamesAreNil
+  enum Errors: Error {
+    case firstNameIsNil
+    case lastNameIsNil
+    case bothNamesAreNil
+  }
+
+  var firstName: String?
+  var lastName: String?
+
+  func getFullName() throws -> String {
+    // pattern matching
+    switch (firstName, lastName) {
+      case (.none, .none):
+        throw Errors.bothNamesAreNil
+
+      case (.none, .some):
+        throw Errors.firstNameIsNil
+
+      case (.some, .none):
+        throw Errors.lastNameIsNil
+
+      case let (.some(firstName), .some(lastName)):
+        return "\(firstName) \(lastName)"
     }
-
-    var firstName: String?
-    var lastName: String?
-
-    func getFullName() throws -> String {
-        // pattern matching
-        switch (firstName, lastName) {
-            case (.none, .none):
-                throw Errors.bothNamesAreNil
-
-            case (.none, .some):
-                throw Errors.firstNameIsNil
-
-            case (.some, .none):
-                throw Errors.lastNameIsNil
-
-            case let (.some(firstName), .some(lastName)):
-                return "\(firstName) \(lastName)"
-        }
-    }
+  }
 }
 
 // there is a global error variable named `error` which contains the error
 
 do {
-    let p = Person()
-    try p.getFullName()
+  let p = Person()
+  try p.getFullName()
 } catch {
-    "Got an error: \(error)"
+  "Got an error: \(error)"
 }
 
 // you can rename global error variable
 
 do {
-    let p = Person(lastName: "Zodylck")
-    try p.getFullName()
+  let p = Person(lastName: "Zodylck")
+  try p.getFullName()
 } catch let renameGlobalErrorVar {
-    "Got an error: \(renameGlobalErrorVar)"
+  "Got an error: \(renameGlobalErrorVar)"
 }
 
 // this doesn't throw, so catch isn't executed
 
 do {
-    let p = Person(firstName: "Kilua", lastName: "Zodylck")
-    try p.getFullName()
+  let p = Person(firstName: "Kilua", lastName: "Zodylck")
+  try p.getFullName()
 } catch {
-    "Got an error: \(error)"
+  "Got an error: \(error)"
 }
 
 // catch specific errors
@@ -68,59 +68,59 @@ do {
 // catching an error of a specific type
 
 do {
-    let p = Person(firstName: "Kilua")
-    try p.getFullName()
-    // more code
-    // more try ...
+  let p = Person(firstName: "Kilua")
+  try p.getFullName()
+  // more code
+  // more try ...
 } catch is Person.Errors {
-    // no more access to the error variable
-    "Got an error."
+  // no more access to the error variable
+  "Got an error."
 } catch {
-    // can still add more catch blocks
-    "Some other error was thrown \(error)"
+  // can still add more catch blocks
+  "Some other error was thrown \(error)"
 }
 
 // check if it throws a specific Person.Error error
 // catching a specific error
 
 do {
-    let p = Person()
-    try p.getFullName()
+  let p = Person()
+  try p.getFullName()
 } catch Person.Errors.firstNameIsNil {
-    "first Name Is Nil Person Error"
+  "first Name Is Nil Person Error"
 } catch Person.Errors.lastNameIsNil {
-    "last Name Is Nil Person Error"
+  "last Name Is Nil Person Error"
 } catch Person.Errors.bothNamesAreNil {
-    "both Names Are Nil Person Error"
+  "both Names Are Nil Person Error"
 } catch {
-    // can still add more catch blocks
-    "Some other error was thrown \(error)"
+  // can still add more catch blocks
+  "Some other error was thrown \(error)"
 }
 
 // validate initializers
 
 struct Car {
-    var manufacturer: String
+  var manufacturer: String
 
-    enum Errors: Error {
-        case invalidManufacturer
-    }
+  enum Errors: Error {
+    case invalidManufacturer
+  }
 
-    init(manufacturer: String) throws {
-        if manufacturer.isEmpty {
-            throw Errors.invalidManufacturer
-        }
-        self.manufacturer = manufacturer
+  init(manufacturer: String) throws {
+    if manufacturer.isEmpty {
+      throw Errors.invalidManufacturer
     }
+    self.manufacturer = manufacturer
+  }
 }
 
 do {
-    let car = try Car(manufacturer: "")
-    car.manufacturer
+  let car = try Car(manufacturer: "")
+  car.manufacturer
 } catch Car.Errors.invalidManufacturer {
-    "Invalid Manufacturer"
+  "Invalid Manufacturer"
 } catch {
-    "Some other error: \(error)"
+  "Some other error: \(error)"
 }
 
 // another way if i don't care about the error thrown, or don't need the catch block
@@ -128,11 +128,11 @@ do {
 // optionally try to call this function, and if it's successful, give me the return value
 
 if let myCar = try? Car(manufacturer: "Telsa") {
-    // myCar is only available in this scope, as expected
-    "It works! My car has been created. \(myCar)"
+  // myCar is only available in this scope, as expected
+  "It works! My car has been created. \(myCar)"
 } else {
-    // i don't need this else block, but i'm sure it's good practice to have one
-    "An error occured. I cannot access the error thrown. I most likely don't care about error in the first place, that's why I'm using this syntax"
+  // i don't need this else block, but i'm sure it's good practice to have one
+  "An error occured. I cannot access the error thrown. I most likely don't care about error in the first place, that's why I'm using this syntax"
 }
 
 // you can assert dominance and force unwrap with (!)
@@ -143,37 +143,37 @@ theCar.manufacturer
 // a function can throw any error. obviously errors that are available in its scope
 
 struct Dog {
-    let isInjured: Bool
-    let isSleeping: Bool
+  let isInjured: Bool
+  let isSleeping: Bool
 
-    enum BarkingErros: Error {
-        case cannotBarkIsSleeping
-    }
+  enum BarkingErros: Error {
+    case cannotBarkIsSleeping
+  }
 
-    enum RunningErrors: Error {
-        case cannotRunIsInjured
-    }
+  enum RunningErrors: Error {
+    case cannotRunIsInjured
+  }
 
-    func bark() throws {
-        if isSleeping {
-            throw BarkingErros.cannotBarkIsSleeping
-        }
-        "Barking..."
+  func bark() throws {
+    if isSleeping {
+      throw BarkingErros.cannotBarkIsSleeping
     }
+    "Barking..."
+  }
 
-    func run() throws {
-        if isInjured {
-            throw RunningErrors.cannotRunIsInjured
-        }
-        "Running..."
+  func run() throws {
+    if isInjured {
+      throw RunningErrors.cannotRunIsInjured
     }
+    "Running..."
+  }
 
-    func barkAndRun() throws {
-        // functions that can throw don't need to handle errors
-        // try is used nakedly
-        try bark()
-        try run()
-    }
+  func barkAndRun() throws {
+    // functions that can throw don't need to handle errors
+    // try is used nakedly
+    try bark()
+    try run()
+  }
 }
 
 let dog = Dog(isInjured: true, isSleeping: true)
@@ -181,14 +181,14 @@ let dog = Dog(isInjured: true, isSleeping: true)
 // you cannot catch multiple errors in the same do statement
 
 do {
-    try dog.barkAndRun()
-    // the first error thrown will be the only error, because executed will step out
+  try dog.barkAndRun()
+  // the first error thrown will be the only error, because executed will step out
 } catch Dog.BarkingErros.cannotBarkIsSleeping {
-    "Damn! The dog cannot bark"
+  "Damn! The dog cannot bark"
 } catch Dog.RunningErrors.cannotRunIsInjured {
-    "Damn! The dog cannot run"
+  "Damn! The dog cannot run"
 } catch {
-    "An error occured: \(error)"
+  "An error occured: \(error)"
 }
 
 // rethrowing errors
@@ -196,80 +196,80 @@ do {
 // basically means it has to receive a function that can throw (eg. calculator param)
 
 func fullName(
-    firstName: String?,
-    lastName: String?,
-    calculator: (String?, String?) throws -> String?
+  firstName: String?,
+  lastName: String?,
+  calculator: (String?, String?) throws -> String?
 ) rethrows
-    -> String?
+  -> String?
 {
-    try calculator(firstName, lastName)
+  try calculator(firstName, lastName)
 }
 
 enum NameErros: Error {
-    case firstNameIsInvalid
-    case lastNameIsInvalid
+  case firstNameIsInvalid
+  case lastNameIsInvalid
 }
 
 // This function doesn't return an optional but still works with the optional string function signature
 
 func + (firstname: String?, lastName: String?) throws -> String {
-    guard let firstname, !firstname.isEmpty else {
-        throw NameErros.firstNameIsInvalid
-    }
+  guard let firstname, !firstname.isEmpty else {
+    throw NameErros.firstNameIsInvalid
+  }
 
-    guard let lastName, !lastName.isEmpty else {
-        throw NameErros.lastNameIsInvalid
-    }
+  guard let lastName, !lastName.isEmpty else {
+    throw NameErros.lastNameIsInvalid
+  }
 
-    return "\(firstname) \(lastName)"
+  return "\(firstname) \(lastName)"
 }
 
 if let fullname = try? fullName(firstName: "Gunther", lastName: "Quil", calculator: +) {
-    fullname
+  fullname
 } else {
-    "do nothing"
+  "do nothing"
 }
 
 do {
-    let fullname = try fullName(firstName: "Peter", lastName: "", calculator: +)
+  let fullname = try fullName(firstName: "Peter", lastName: "", calculator: +)
 } catch NameErros.firstNameIsInvalid {
-    "invalid first name"
+  "invalid first name"
 } catch NameErros.lastNameIsInvalid {
-    "invalid last name"
+  "invalid last name"
 } catch let err {
-    "An error occured: \(err)"
+  "An error occured: \(err)"
 }
 
 // show that an error/exception is graceful
 // use the Result type to show either a success or a failure. Result<Success, Error>
 
 enum IntegerErrors: Error {
-    case noPositiveIntegerBefore(thisValue: Int)
+  case noPositiveIntegerBefore(thisValue: Int)
 }
 
 func getPreviousPositiveInteger(from int: Int) -> Result<Int, IntegerErrors> {
-    guard int > 0 else {
-        return Result.failure(
-            IntegerErrors.noPositiveIntegerBefore(thisValue: int)
-        )
-    }
-    return Result.success(int - 1)
+  guard int > 0 else {
+    return Result.failure(
+      IntegerErrors.noPositiveIntegerBefore(thisValue: int)
+    )
+  }
+  return Result.success(int - 1)
 }
 
 // create more complexity - wahala
 
 func performGet(forvalue value: Int) {
-    // Result is an enum just like Optional, you can perform switch
-    switch getPreviousPositiveInteger(from: value) {
-        case let .success(previousValue):
-            "Previous value is: \(previousValue)"
+  // Result is an enum just like Optional, you can perform switch
+  switch getPreviousPositiveInteger(from: value) {
+    case let .success(previousValue):
+      "Previous value is: \(previousValue)"
 
-        case let .failure(error):
-            switch error {
-                case let .noPositiveIntegerBefore(thisValue):
-                    "There are no positive integers before: \(thisValue)"
-            }
-    }
+    case let .failure(error):
+      switch error {
+        case let .noPositiveIntegerBefore(thisValue):
+          "There are no positive integers before: \(thisValue)"
+      }
+  }
 }
 
 performGet(forvalue: -1)

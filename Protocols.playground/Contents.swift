@@ -7,23 +7,23 @@ import Foundation
 // protocols cannot be instantiated
 
 protocol CanBreathe {
-    func breathe()
+  func breathe()
 }
 
 // MARK: - Animal
 
 struct Animal: CanBreathe {
-    func breathe() {
-        "Animal breathing..."
-    }
+  func breathe() {
+    "Animal breathing..."
+  }
 }
 
 // MARK: - Person
 
 struct Person: CanBreathe {
-    func breathe() {
-        "Person breathing..."
-    }
+  func breathe() {
+    "Person breathing..."
+  }
 }
 
 let cat = Animal()
@@ -37,21 +37,21 @@ dude.breathe()
 // maybe think of extensions as prototypes in javascript? [Object.proto.newMethod = () => {}]
 
 protocol CanJump {
-    func jump()
+  func jump()
 }
 
 extension CanJump {
-    func jump() {
-        "Jumping..."
-    }
+  func jump() {
+    "Jumping..."
+  }
 }
 
 // MARK: - Cat
 
 struct Cat: CanJump {
-    func jump() {
-        "Can override default jump implementation"
-    }
+  func jump() {
+    "Can override default jump implementation"
+  }
 }
 
 let whiskers = Cat()
@@ -64,40 +64,40 @@ whiskers.jump()
 // you can write to a read-only property when using var & mutating keywords in a Struct
 
 protocol HasNameAndAge {
-    var name: String { get }
-    var age: Int { get set }
-    /// i did not put all the function headers/signatures in the protocol. it is possible to not do so
-    /// i think it is best to put all function headers/signatures in the protocol. easier to understand at first glance
-    mutating func birthday()
+  var name: String { get }
+  var age: Int { get set }
+  /// i did not put all the function headers/signatures in the protocol. it is possible to not do so
+  /// i think it is best to put all function headers/signatures in the protocol. easier to understand at first glance
+  mutating func birthday()
 }
 
 extension HasNameAndAge {
-    func describe() -> String {
-        "Your name is \(name), and you are \(age) years old"
-    }
+  func describe() -> String {
+    "Your name is \(name), and you are \(age) years old"
+  }
 
-    /// understandable, because age is readable & writable
-    mutating func birthday() {
-        age += 1
-    }
+  /// understandable, because age is readable & writable
+  mutating func birthday() {
+    age += 1
+  }
 
-    // Cannot assign to property: 'name' is a get-only property. but can do that in the struct
-    //    mutating func changeName() {
-    //        self.name = "Shanta"
-    //    }
+  // Cannot assign to property: 'name' is a get-only property. but can do that in the struct
+  //    mutating func changeName() {
+  //        self.name = "Shanta"
+  //    }
 }
 
 // MARK: - Lady
 
 struct Lady: HasNameAndAge {
-    /// var means name can be mutated
-    var name: String
-    var age: Int
+  /// var means name can be mutated
+  var name: String
+  var age: Int
 
-    /// should not be possible, even when using var?
-    mutating func changeName() {
-        name = "Shanta"
-    }
+  /// should not be possible, even when using var?
+  mutating func changeName() {
+    name = "Shanta"
+  }
 }
 
 var lady1 = Lady(name: "Jo", age: 26)
@@ -119,20 +119,20 @@ lady1.describe()
 // as keyword checks if a struct conforms to a specific protocol, and promotes the struct
 
 protocol Vehicle {
-    var speed: Int { get set }
-    mutating func accelerate(by value: Int)
+  var speed: Int { get set }
+  mutating func accelerate(by value: Int)
 }
 
 extension Vehicle {
-    mutating func accelerate(by value: Int) {
-        speed += value
-    }
+  mutating func accelerate(by value: Int) {
+    speed += value
+  }
 }
 
 // MARK: - Bike
 
 struct Bike: Vehicle {
-    var speed = 0
+  var speed = 0
 }
 
 var bike = Bike()
@@ -141,12 +141,12 @@ bike.accelerate(by: 23)
 bike.speed
 
 func describeRelationship(obj: Any) {
-    if obj is Vehicle {
-        // no code completion, obj is still of type Any
-        "\(obj) conforms to Vehicle protocol"
-    } else {
-        "\(obj) DOES NOT conforms to Vehicle protocol"
-    }
+  if obj is Vehicle {
+    // no code completion, obj is still of type Any
+    "\(obj) conforms to Vehicle protocol"
+  } else {
+    "\(obj) DOES NOT conforms to Vehicle protocol"
+  }
 }
 
 describeRelationship(obj: bike)
@@ -158,14 +158,14 @@ let rando = Randy()
 describeRelationship(obj: rando)
 
 func increaseSpeedIfVehicle(obj: Any) {
-    if var vehicle = obj as? Vehicle {
-        // code completion, vehicle is of type Vehicle
-        vehicle.speed
-        vehicle.accelerate(by: 15)
-        vehicle.speed
-    } else {
-        "Not a vehicle"
-    }
+  if var vehicle = obj as? Vehicle {
+    // code completion, vehicle is of type Vehicle
+    vehicle.speed
+    vehicle.accelerate(by: 15)
+    vehicle.speed
+  } else {
+    "Not a vehicle"
+  }
 }
 
 increaseSpeedIfVehicle(obj: bike)

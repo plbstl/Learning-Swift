@@ -11,22 +11,22 @@ import Foundation
 // classes can have multiple Convenience initializers and multiple Designated initializers
 
 class Person {
-    // MARK: Lifecycle
+  // MARK: Lifecycle
 
-    init(name: String, age: Int, notClassProperty _: Int? = 0) {
-        self.name = name
-        self.age = age
-        // notClassProperty can be used here to for other calculations or something
-    }
+  init(name: String, age: Int, notClassProperty _: Int? = 0) {
+    self.name = name
+    self.age = age
+    // notClassProperty can be used here to for other calculations or something
+  }
 
-    // MARK: Internal
+  // MARK: Internal
 
-    let name: String
-    var age: Int
+  let name: String
+  var age: Int
 
-    func birthday() {
-        age += 1
-    }
+  func birthday() {
+    age += 1
+  }
 }
 
 // classes allow internal mutability. note the let keyword
@@ -56,23 +56,23 @@ person2 === person1Clone
 // you have to manually create it (==) to use it
 
 class Animal: Equatable {
-    // MARK: Lifecycle
+  // MARK: Lifecycle
 
-    init(name: String, age: Int, specie: String) {
-        self.name = name
-        self.age = age
-        self.specie = specie
-    }
+  init(name: String, age: Int, specie: String) {
+    self.name = name
+    self.age = age
+    self.specie = specie
+  }
 
-    // MARK: Internal
+  // MARK: Internal
 
-    var name: String
-    var age: Int
-    var specie: String
+  var name: String
+  var age: Int
+  var specie: String
 
-    static func == (lhs: Animal, rhs: Animal) -> Bool {
-        lhs.specie == rhs.specie
-    }
+  static func == (lhs: Animal, rhs: Animal) -> Bool {
+    lhs.specie == rhs.specie
+  }
 }
 
 let animal1 = Animal(name: "Jansawed", age: 4, specie: "Homo Erectus")
@@ -86,9 +86,9 @@ animal1 === animal2
 // Subclassing
 
 class Vehicle {
-    func goBrrrr() -> String {
-        "Brrrrrrr Brrrrrrrrgh!"
-    }
+  func goBrrrr() -> String {
+    "Brrrrrrr Brrrrrrrrgh!"
+  }
 }
 
 // MARK: - Car
@@ -104,21 +104,21 @@ newCar.goBrrrr()
 // lets make it changeable only internally
 
 class AnotherPerson {
-    // MARK: Lifecycle
+  // MARK: Lifecycle
 
-    init(name: String, age: Int) {
-        self.name = name
-        self.age = age
-    }
+  init(name: String, age: Int) {
+    self.name = name
+    self.age = age
+  }
 
-    // MARK: Internal
+  // MARK: Internal
 
-    var name: String
-    private(set) var age: Int
+  var name: String
+  private(set) var age: Int
 
-    func birthday() {
-        age += 1
-    }
+  func birthday() {
+    age += 1
+  }
 }
 
 let anotherPerson = AnotherPerson(name: "Hans", age: 56)
@@ -135,33 +135,33 @@ anotherPerson.age
 // designated initializers can only call designated initializers in thier superclasses
 
 class Pet {
-    // MARK: Lifecycle
+  // MARK: Lifecycle
 
-    init(name: String, age: Int) {
-        self.name = name
-        self.age = age
-    }
+  init(name: String, age: Int) {
+    self.name = name
+    self.age = age
+  }
 
-    convenience init(name: String) {
-        self.init(name: name, age: 0)
-    }
+  convenience init(name: String) {
+    self.init(name: name, age: 0)
+  }
 
-    // MARK: Internal
+  // MARK: Internal
 
-    var name: String
-    var age: Int
+  var name: String
+  var age: Int
 }
 
 // MARK: - FurryPet
 
 class FurryPet: Pet {
-    convenience init() {
-        self.init(name: "Noname")
-    }
+  convenience init() {
+    self.init(name: "Noname")
+  }
 
-    init(name: String) {
-        super.init(name: name, age: 1)
-    }
+  init(name: String) {
+    super.init(name: name, age: 1)
+  }
 }
 
 let fpet1 = FurryPet()
@@ -177,26 +177,26 @@ fpet2.age
 // de-initializers are run by Swift when removing classes from memory
 
 class Random {
-    // MARK: Lifecycle
+  // MARK: Lifecycle
 
-    init() {
-        "Initialized"
-    }
+  init() {
+    "Initialized"
+  }
 
-    deinit {
-        "Deinitialized"
-    }
+  deinit {
+    "Deinitialized"
+  }
 
-    // MARK: Internal
+  // MARK: Internal
 
-    func doSomething() {
-        "Did something"
-    }
+  func doSomething() {
+    "Did something"
+  }
 }
 
 let myClosure = {
-    let randy = Random()
-    randy.doSomething()
+  let randy = Random()
+  randy.doSomething()
 }
 
 myClosure()
