@@ -51,7 +51,7 @@ func encrypt(num: Int) {
       divide(num: substractedValue) { dividedValue in
         "Level 3 encryption: \(dividedValue)"
         add(num: dividedValue) { cipherText in
-          "Final encryption: \(cipherText)"
+          print("Final encryption: \(cipherText)")
         }
       }
     }
@@ -65,7 +65,7 @@ encrypt(num: 7) // 39
 // now lets change it to Async Await
 
 enum NetworkServiceAsync {
-  static func request<T: Any>(delay: Double, perform op: () -> T) async throws -> T {
+  static func request<T>(delay: Double, perform op: () -> T) async throws -> T {
     try await Task.sleep(for: .seconds(delay))
     return op()
   }
